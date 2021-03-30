@@ -298,17 +298,344 @@ AccueilComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/accueil/accueil.component */ "RUok");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "EVdn");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/accueil/accueil.component */ "RUok");
+
 
 
 class AppComponent {
     constructor() {
         this.title = 'dashfront';
     }
+    ngOnInit() {
+        // Document has been loaded
+        jquery__WEBPACK_IMPORTED_MODULE_0__(document).ready(function () {
+            // Helper Function to Extract Access Token for URL
+            const getUrlParameter = (sParam) => {
+                let sPageURL = window.location.search.substring(1), ////substring will take everything after the https link and split the #/&
+                sURLVariables = sPageURL != undefined && sPageURL.length > 0 ? sPageURL.split('#') : [], sParameterName, i;
+                let split_str = window.location.href.length > 0 ? window.location.href.split('#') : [];
+                sURLVariables = split_str != undefined && split_str.length > 1 && split_str[1].length > 0 ? split_str[1].split('&') : [];
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] === sParam) {
+                        return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                    }
+                }
+            };
+            // Get Access Token
+            const accessToken = getUrlParameter('access_token');
+            // AUTHORIZE with Spotify (if needed)
+            // *************** REPLACE THESE VALUES! *************************
+            let client_id = '706e363542db4c55bbce2c8a1a13d50d';
+            // Use the following site to convert your regular url to the encoded version:
+            // https://www.url-encode-decode.com/
+            let redirect_uri = 'https%3A%2F%2Fzikify.github.io%2F'; // GitHub Pages URL or whatever your public url to this app is
+            // *************** END *************************
+            const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}`;
+            // Don't authorize if we have an access token already
+            if (accessToken == null || accessToken == "" || accessToken == undefined) {
+                window.location.replace(redirect);
+            }
+            // Search button has been clicked
+            jquery__WEBPACK_IMPORTED_MODULE_0__("#search_button").click(function () {
+                //Get the value of the search box
+                let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#search-text').val();
+                raw_search_query = raw_search_query.toString();
+                let search_query = encodeURI(raw_search_query);
+                // Make Spotify API call
+                // Note: We are using the track API endpoint.
+                jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+                    url: `https://api.spotify.com/v1/search?q=${search_query}&type=track`,
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    success: function (data) {
+                        // Load our songs from Spotify into our page
+                        let num_of_tracks = data.tracks.items.length;
+                        let count = 0;
+                        // Max number of songs is 12
+                        const max_songs = 12;
+                        while (count < max_songs && count < num_of_tracks) {
+                            // Extract the id of the FIRST song from the data object
+                            let id = data.tracks.items[count].id;
+                            // Constructing two different iframes to embed the song
+                            let src_str = `https://open.spotify.com/embed/track/${id}`;
+                            let iframe = `<div class='song'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
+                            let parent_div = jquery__WEBPACK_IMPORTED_MODULE_0__('#song_' + count);
+                            parent_div.html(iframe);
+                            count++;
+                        }
+                    }
+                }); // End of Spotify ajax call
+            }); // End of search button
+        }); // End of document.ready
+    }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
-AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 114, vars: 0, consts: [["href", "/assets/css/nucleo-icons.css", "rel", "stylesheet"], [1, ""], [1, "wrapper"], ["data", "grey", 1, "sidebar"], [1, "sidebar-wrapper"], [1, "logo"], ["href", "javascript:void(0)", 1, "simple-text", "logo-mini"], ["href", "javascript:void(0)", 1, "simple-text", "logo-normal"], [1, "nav"], [1, "active"], ["href", "./dashboard.html"], [1, "tim-icons", "icon-app"], ["href", "./icons.html"], [1, "tim-icons", "icon-headphones"], ["href", "./map.html"], [1, "tim-icons", "icon-paper"], ["href", "./notifications.html"], [1, "tim-icons", "icon-zoom-split"], ["href", "./user.html"], [1, "tim-icons", "icon-calendar-60"], ["href", "./tables.html"], [1, "tim-icons", "icon-send"], ["href", "./typography.html"], [1, "tim-icons", "icon-pin"], [1, "main-panel"], [1, "navbar", "navbar-expand-lg", "navbar-absolute", "navbar-transparent"], [1, "container-fluid"], [1, "navbar-wrapper"], [1, "navbar-toggle", "d-inline"], ["type", "button", 1, "navbar-toggler"], [1, "navbar-toggler-bar", "bar1"], [1, "navbar-toggler-bar", "bar2"], [1, "navbar-toggler-bar", "bar3"], ["href", "javascript:void(0)", 1, "navbar-brand"], ["id", "navigation", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "ml-auto"], [1, "search-bar", "input-group"], [1, "content"], [1, "footer"], [1, "nav-item"], ["href", "javascript:void(0)", 1, "nav-link"], [1, "copyright"], [1, "fixed-plugin"], [1, "dropdown", "show-dropdown"], ["href", "#", "data-toggle", "dropdown"], [1, "fa", "fa-cog", "fa-2x"], [1, "dropdown-menu"], [1, "header-title"], [1, "adjustments-line"], ["href", "javascript:void(0)", 1, "switch-trigger", "background-color"], [1, "badge-colors", "text-center"], ["data-color", "primary", 1, "badge", "filter", "badge-primary", "active"], ["data-color", "blue", 1, "badge", "filter", "badge-info"], ["data-color", "green", 1, "badge", "filter", "badge-success"], [1, "clearfix"], [1, "adjustments-line", "text-center", "color-change"], [1, "color-label"], [1, "badge", "light-badge", "mr-2"], [1, "badge", "dark-badge", "ml-2"], [1, "button-container"], ["href", "https://www.creative-tim.com/product/black-dashboard", "target", "_blank", 1, "btn", "btn-primary", "btn-block", "btn-round"], ["href", "https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html", "target", "_blank", 1, "btn", "btn-default", "btn-block", "btn-round"], [1, "button-container", "text-center"], ["id", "twitter", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-twitter"], ["id", "facebook", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-facebook-f"], ["href", "https://github.com/creativetimofficial/black-dashboard", "data-icon", "octicon-star", "data-size", "large", "data-show-count", "true", "aria-label", "Star ntkme/github-buttons on GitHub", 1, "github-button"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 114, vars: 0, consts: [["href", "/assets/css/nucleo-icons.css", "rel", "stylesheet"], [1, ""], [1, "wrapper"], ["data", "grey", 1, "sidebar"], [1, "sidebar-wrapper"], [1, "logo"], ["href", "javascript:void(0)", 1, "simple-text", "logo-mini"], ["href", "javascript:void(0)", 1, "simple-text", "logo-normal"], [1, "nav"], [1, "active"], ["href", "./dashboard.html"], [1, "tim-icons", "icon-app"], ["href", "./icons.html"], [1, "tim-icons", "icon-headphones"], ["href", "./map.html"], [1, "tim-icons", "icon-paper"], ["href", "./notifications.html"], [1, "tim-icons", "icon-zoom-split"], ["href", "./user.html"], [1, "tim-icons", "icon-calendar-60"], ["href", "./tables.html"], [1, "tim-icons", "icon-send"], ["href", "./typography.html"], [1, "tim-icons", "icon-pin"], [1, "main-panel"], [1, "navbar", "navbar-expand-lg", "navbar-absolute", "navbar-transparent"], [1, "container-fluid"], [1, "navbar-wrapper"], [1, "navbar-toggle", "d-inline"], ["type", "button", 1, "navbar-toggler"], [1, "navbar-toggler-bar", "bar1"], [1, "navbar-toggler-bar", "bar2"], [1, "navbar-toggler-bar", "bar3"], ["href", "javascript:void(0)", 1, "navbar-brand"], ["id", "navigation", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "ml-auto"], [1, "search-bar", "input-group"], [1, "content"], [1, "footer"], [1, "nav-item"], ["href", "javascript:void(0)", 1, "nav-link"], [1, "copyright"], [1, "fixed-plugin"], [1, "dropdown", "show-dropdown"], ["href", "#", "data-toggle", "dropdown"], [1, "fa", "fa-cog", "fa-2x"], [1, "dropdown-menu"], [1, "header-title"], [1, "adjustments-line"], ["href", "javascript:void(0)", 1, "switch-trigger", "background-color"], [1, "badge-colors", "text-center"], ["data-color", "primary", 1, "badge", "filter", "badge-primary", "active"], ["data-color", "blue", 1, "badge", "filter", "badge-info"], ["data-color", "green", 1, "badge", "filter", "badge-success"], [1, "clearfix"], [1, "adjustments-line", "text-center", "color-change"], [1, "color-label"], [1, "badge", "light-badge", "mr-2"], [1, "badge", "dark-badge", "ml-2"], [1, "button-container"], ["href", "https://www.creative-tim.com/product/black-dashboard", "target", "_blank", 1, "btn", "btn-primary", "btn-block", "btn-round"], ["href", "https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html", "target", "_blank", 1, "btn", "btn-default", "btn-block", "btn-round"], [1, "button-container", "text-center"], ["id", "twitter", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-twitter"], ["id", "facebook", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-facebook-f"], ["href", "https://github.com/creativetimofficial/black-dashboard", "data-icon", "octicon-star", "data-size", "large", "data-show-count", "true", "aria-label", "Star ntkme/github-buttons on GitHub", 1, "github-button"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "head");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "link", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "body", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "a", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, " CT ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "a", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, " ZikiFy ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "ul", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "li", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "a", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](14, "i", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Accueil");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "a", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "i", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, "Spotify");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](22, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "a", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](24, "i", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "Lyrics");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "a", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](29, "i", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, "Infos");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "a", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](34, "i", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, "Concerts");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](38, "a", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](39, "i", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "Contact");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "li");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](43, "a", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](44, "i", 23);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](45, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](46, "A propos");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "div", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](48, "nav", 25);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](49, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](50, "div", 27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](51, "div", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](52, "button", 29);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](53, "span", 30);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](54, "span", 31);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](55, "span", 32);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](56, "a", 33);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](57, "ZikiFy");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](58, "div", 34);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](59, "ul", 35);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](60, "li", 36);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](61, "div", 37);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](62, "app-accueil");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](63, "footer", 38);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](64, "div", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](65, "ul", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](66, "li", 39);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](67, "a", 40);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](68, " A propos ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](69, "li", 39);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](70, "a", 40);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](71, " Contact ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](72, "div", 41);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](73, " \u00A9 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](74, "2021 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](75, "div", 42);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](76, "div", 43);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](77, "a", 44);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](78, "i", 45);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](79, "ul", 46);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](80, "li", 47);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](81, " Sidebar Background");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](82, "li", 48);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](83, "a", 49);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](84, "div", 50);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](85, "span", 51);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](86, "span", 52);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](87, "span", 53);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](88, "div", 54);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](89, "li", 55);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](90, "span", 56);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](91, "LIGHT MODE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](92, "span", 57);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](93, "span", 58);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](94, "span", 56);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](95, "DARK MODE");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](96, "li", 59);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](97, "a", 60);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](98, "Download Now");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](99, "a", 61);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](100, " Documentation ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](101, "li", 47);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](102, "Thank you for 95 shares!");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](103, "li", 62);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](104, "button", 63);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](105, "i", 64);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](106, " \u00B7 45");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](107, "button", 65);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](108, "i", 66);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](109, " \u00B7 50");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](110, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](111, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](112, "a", 67);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](113, "Star");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } }, directives: [_components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_2__["AccueilComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
+
+
+/***/ }),
+
+/***/ "ZAI4":
+/*!*******************************!*\
+  !*** ./src/app/app.module.ts ***!
+  \*******************************/
+/*! exports provided: AppModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "jhN1");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ "Sy1n");
+/* harmony import */ var _components_spotify_spotify_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/spotify/spotify.component */ "h5Oq");
+/* harmony import */ var _components_lyrics_lyrics_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/lyrics/lyrics.component */ "C22L");
+/* harmony import */ var _components_infos_infos_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/infos/infos.component */ "nW8q");
+/* harmony import */ var _components_concert_concert_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/concert/concert.component */ "g4mS");
+/* harmony import */ var _components_bonjour_pseudo_bonjour_pseudo_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/bonjour-pseudo/bonjour-pseudo.component */ "nGtc");
+/* harmony import */ var _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/accueil/accueil.component */ "RUok");
+/* harmony import */ var _components_bloc_accueil_bloc_accueil_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bloc-accueil/bloc-accueil.component */ "c94g");
+/* harmony import */ var _components_bloc_spotify_bloc_spotify_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/bloc-spotify/bloc-spotify.component */ "tYsX");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+
+
+
+
+
+
+
+class AppModule {
+}
+AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineInjector"]({ providers: [], imports: [[
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"],
+        _components_spotify_spotify_component__WEBPACK_IMPORTED_MODULE_2__["SpotifyComponent"],
+        _components_lyrics_lyrics_component__WEBPACK_IMPORTED_MODULE_3__["LyricsComponent"],
+        _components_infos_infos_component__WEBPACK_IMPORTED_MODULE_4__["InfosComponent"],
+        _components_concert_concert_component__WEBPACK_IMPORTED_MODULE_5__["ConcertComponent"],
+        _components_bonjour_pseudo_bonjour_pseudo_component__WEBPACK_IMPORTED_MODULE_6__["BonjourPseudoComponent"],
+        _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_7__["AccueilComponent"],
+        _components_bloc_accueil_bloc_accueil_component__WEBPACK_IMPORTED_MODULE_8__["BlocAccueilComponent"],
+        _components_bloc_spotify_bloc_spotify_component__WEBPACK_IMPORTED_MODULE_9__["BlocSpotifyComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]] }); })();
+
+
+/***/ }),
+
+/***/ "c94g":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/bloc-accueil/bloc-accueil.component.ts ***!
+  \*******************************************************************/
+/*! exports provided: BlocAccueilComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlocAccueilComponent", function() { return BlocAccueilComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _accueil_accueil_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../accueil/accueil.component */ "RUok");
+
+
+class BlocAccueilComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+BlocAccueilComponent.ɵfac = function BlocAccueilComponent_Factory(t) { return new (t || BlocAccueilComponent)(); };
+BlocAccueilComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BlocAccueilComponent, selectors: [["app-bloc-accueil"]], decls: 114, vars: 0, consts: [["href", "/assets/css/nucleo-icons.css", "rel", "stylesheet"], [1, ""], [1, "wrapper"], ["data", "grey", 1, "sidebar"], [1, "sidebar-wrapper"], [1, "logo"], ["href", "javascript:void(0)", 1, "simple-text", "logo-mini"], ["href", "javascript:void(0)", 1, "simple-text", "logo-normal"], [1, "nav"], [1, "active"], ["href", "./dashboard.html"], [1, "tim-icons", "icon-app"], ["href", "./icons.html"], [1, "tim-icons", "icon-headphones"], ["href", "./map.html"], [1, "tim-icons", "icon-paper"], ["href", "./notifications.html"], [1, "tim-icons", "icon-zoom-split"], ["href", "./user.html"], [1, "tim-icons", "icon-calendar-60"], ["href", "./tables.html"], [1, "tim-icons", "icon-send"], ["href", "./typography.html"], [1, "tim-icons", "icon-pin"], [1, "main-panel"], [1, "navbar", "navbar-expand-lg", "navbar-absolute", "navbar-transparent"], [1, "container-fluid"], [1, "navbar-wrapper"], [1, "navbar-toggle", "d-inline"], ["type", "button", 1, "navbar-toggler"], [1, "navbar-toggler-bar", "bar1"], [1, "navbar-toggler-bar", "bar2"], [1, "navbar-toggler-bar", "bar3"], ["href", "javascript:void(0)", 1, "navbar-brand"], ["id", "navigation", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "ml-auto"], [1, "search-bar", "input-group"], [1, "content"], [1, "footer"], [1, "nav-item"], ["href", "javascript:void(0)", 1, "nav-link"], [1, "copyright"], [1, "fixed-plugin"], [1, "dropdown", "show-dropdown"], ["href", "#", "data-toggle", "dropdown"], [1, "fa", "fa-cog", "fa-2x"], [1, "dropdown-menu"], [1, "header-title"], [1, "adjustments-line"], ["href", "javascript:void(0)", 1, "switch-trigger", "background-color"], [1, "badge-colors", "text-center"], ["data-color", "primary", 1, "badge", "filter", "badge-primary", "active"], ["data-color", "blue", 1, "badge", "filter", "badge-info"], ["data-color", "green", 1, "badge", "filter", "badge-success"], [1, "clearfix"], [1, "adjustments-line", "text-center", "color-change"], [1, "color-label"], [1, "badge", "light-badge", "mr-2"], [1, "badge", "dark-badge", "ml-2"], [1, "button-container"], ["href", "https://www.creative-tim.com/product/black-dashboard", "target", "_blank", 1, "btn", "btn-primary", "btn-block", "btn-round"], ["href", "https://demos.creative-tim.com/black-dashboard/docs/1.0/getting-started/introduction.html", "target", "_blank", 1, "btn", "btn-default", "btn-block", "btn-round"], [1, "button-container", "text-center"], ["id", "twitter", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-twitter"], ["id", "facebook", 1, "btn", "btn-round", "btn-info"], [1, "fab", "fa-facebook-f"], ["href", "https://github.com/creativetimofficial/black-dashboard", "data-icon", "octicon-star", "data-size", "large", "data-show-count", "true", "aria-label", "Star ntkme/github-buttons on GitHub", 1, "github-button"]], template: function BlocAccueilComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "head");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "link", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -490,82 +817,7 @@ AppComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCompo
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    } }, directives: [_components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_1__["AccueilComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
-
-
-/***/ }),
-
-/***/ "ZAI4":
-/*!*******************************!*\
-  !*** ./src/app/app.module.ts ***!
-  \*******************************/
-/*! exports provided: AppModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "jhN1");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ "Sy1n");
-/* harmony import */ var _components_spotify_spotify_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/spotify/spotify.component */ "h5Oq");
-/* harmony import */ var _components_lyrics_lyrics_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/lyrics/lyrics.component */ "C22L");
-/* harmony import */ var _components_infos_infos_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/infos/infos.component */ "nW8q");
-/* harmony import */ var _components_concert_concert_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/concert/concert.component */ "g4mS");
-/* harmony import */ var _components_bonjour_pseudo_bonjour_pseudo_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/bonjour-pseudo/bonjour-pseudo.component */ "nGtc");
-/* harmony import */ var _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/accueil/accueil.component */ "RUok");
-/* harmony import */ var _components_bloc_accueil_bloc_accueil_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/bloc-accueil/bloc-accueil.component */ "c94g");
-/* harmony import */ var _components_bloc_spotify_bloc_spotify_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/bloc-spotify/bloc-spotify.component */ "tYsX");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-
-
-
-
-
-
-
-
-
-
-class AppModule {
-}
-AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵdefineInjector"]({ providers: [], imports: [[
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]
-        ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_10__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__["AppComponent"],
-        _components_spotify_spotify_component__WEBPACK_IMPORTED_MODULE_2__["SpotifyComponent"],
-        _components_lyrics_lyrics_component__WEBPACK_IMPORTED_MODULE_3__["LyricsComponent"],
-        _components_infos_infos_component__WEBPACK_IMPORTED_MODULE_4__["InfosComponent"],
-        _components_concert_concert_component__WEBPACK_IMPORTED_MODULE_5__["ConcertComponent"],
-        _components_bonjour_pseudo_bonjour_pseudo_component__WEBPACK_IMPORTED_MODULE_6__["BonjourPseudoComponent"],
-        _components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_7__["AccueilComponent"],
-        _components_bloc_accueil_bloc_accueil_component__WEBPACK_IMPORTED_MODULE_8__["BlocAccueilComponent"],
-        _components_bloc_spotify_bloc_spotify_component__WEBPACK_IMPORTED_MODULE_9__["BlocSpotifyComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]] }); })();
-
-
-/***/ }),
-
-/***/ "c94g":
-/*!*******************************************************************!*\
-  !*** ./src/app/components/bloc-accueil/bloc-accueil.component.ts ***!
-  \*******************************************************************/
-/*! exports provided: BlocAccueilComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlocAccueilComponent", function() { return BlocAccueilComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-class BlocAccueilComponent {
-    constructor() { }
-    ngOnInit() {
-    }
-}
-BlocAccueilComponent.ɵfac = function BlocAccueilComponent_Factory(t) { return new (t || BlocAccueilComponent)(); };
-BlocAccueilComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: BlocAccueilComponent, selectors: [["app-bloc-accueil"]], decls: 0, vars: 0, template: function BlocAccueilComponent_Template(rf, ctx) { }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJibG9jLWFjY3VlaWwuY29tcG9uZW50LnNjc3MifQ== */"] });
+    } }, directives: [_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_1__["AccueilComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJibG9jLWFjY3VlaWwuY29tcG9uZW50LnNjc3MifQ== */"] });
 
 
 /***/ }),
