@@ -192,7 +192,7 @@ function AccueilComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 8 BACK TO BACK ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 8.2 BACK TO BACK ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
@@ -309,19 +309,16 @@ class AccueilComponent {
     }
     accederSpotify() {
         this.hide();
-        this.isVisibleSpotify = true;
     }
     accederInfos() {
         this.hide();
-        this.isVisibleAccueil = false;
     }
     accederConcert() {
         this.hide();
-        this.isVisibleAccueil = false;
     }
     accederLyrics() {
         this.hide();
-        this.isVisibleAccueil = false;
+        this.isVisibleLyrics = true;
     }
 }
 AccueilComponent.ɵfac = function AccueilComponent_Factory(t) { return new (t || AccueilComponent)(); };
