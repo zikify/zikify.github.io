@@ -95,7 +95,7 @@ function AccueilComponent_form_0_Template(rf, ctx) { if (rf & 1) {
     const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 6 OH SA MEEERRRE ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 7 PITIE ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
@@ -830,7 +830,7 @@ class SpotifyComponent {
     }
 }
 SpotifyComponent.ɵfac = function SpotifyComponent_Factory(t) { return new (t || SpotifyComponent)(); };
-SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 17, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], [1, "card-body"], [1, "buscar-caja"], ["type", "text", "name", "", "id", "search-text", "placeholder", "Saisir un titre / artiste", 1, "input-nom"], ["type", "button", 1, "buscar-btn", 3, "click"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
+SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 17, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], [1, "card-body"], [1, "buscar-caja"], ["type", "text", "name", "", "id", "search-text", "placeholder", "Saisir un titre / artiste", 1, "buscar-txt"], ["type", "button", 1, "buscar-btn", 3, "click"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "div", 2);
