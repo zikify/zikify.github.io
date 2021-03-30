@@ -1,0 +1,73 @@
+<form *ngIf="isVisibleAccueil">
+    <div class="bienvenue"> SITE MIS A JOUR </div>
+    <br> <br> 
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <button class="btn-default animation-on-hover" type="button" (click)="accederSpotify();">
+                <!-- <button type="button" class="btn-default" (click)="accederSpotify();"> -->
+                  <div class="carte-spotify">
+                      <div class="card-header">
+                        <div class="titre-carte">Spotify</div>
+                      </div>
+                      <div class="card-body">
+                        <div class="contenu-carte"> Ecoutez vos musiques et obtenez des informations sur celles-ci !  </div>
+                        <br>
+                      </div>
+                  </div>
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <button class="btn-default animation-on-hover" type="button" (click)="accederLyrics();">
+                <div class="carte-lyrics">
+                  <div class="card-header">
+                    <div class="titre-carte">Lyrics</div>
+                  </div>
+                  <div class="card-body">
+                      <div class="contenu-carte"> Accédez aux paroles de chansons du monde entier ! </div>
+                      <br>
+                  </div>
+                </div>
+            </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <button class="btn-default animation-on-hover" type="button" (click)="accederInfos();">
+                <div class= carte-infos>
+                    <div class="card-header">
+                        <div class="titre-carte">Infos</div>
+                    </div>
+                    <div class="card-body">
+                     <div class = contenu-carte> Obtenez des informations sur vos artistes favoris ! </div>
+                     <br>
+                    </div>
+                </div>
+            </button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-chart">
+                <button class="btn-default animation-on-hover" type="button" (click)="accederConcert();">
+                <div class= carte-concert>
+                  <div class="card-header">
+                    <div class="titre-carte">Concert</div>
+                  </div>
+                  <div class="card-body">
+                    <div class = contenu-carte>Retrouvez les concerts de vos artistes préférés ! </div>
+                    <br>
+                  </div>
+                </div>
+            </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form *ngIf="isVisibleSpotify">
+    <app-spotify [token]="token"></app-spotify>
+</form>
