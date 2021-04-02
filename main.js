@@ -693,6 +693,7 @@ class AccueilComponent {
         this.isVisibleSpotify = false;
         this.isVisibleLyrics = false;
         this.isConnected = false;
+        this.token = this.token = 'BQAu2U5Kp00XXa4m_gg4WhxvDf4MTywmqRh2Mq6eEjeeZsxFF3UBVgZ8P0lwrz-16exdaYv8e7zuGotUo5VK6FYwkIv2BK4q1B4R8SlFsYNn65cWgc6KKXxN0vSUgJenRbV0eeJx5MSJQR3YH4kJx8edK4ALLTBtJrVwaevMZVaSN92Uil43sGHdIQol9zlSlYeLngsDVdcazb7TxxWYbB1HcYhczSvO524sWuolN9eLG_VZF4MTbvrnHd-ENyv4X6vOsU1qprK8nuXf14oSb2mRUjQ';
         /*
         if (this.token == null){
           console.log("isCONNECTED = FALSE");
@@ -1249,6 +1250,7 @@ __webpack_require__.r(__webpack_exports__);
 class SpotifyComponent {
     constructor() { }
     ngOnInit() {
+        this.token = 'BQAu2U5Kp00XXa4m_gg4WhxvDf4MTywmqRh2Mq6eEjeeZsxFF3UBVgZ8P0lwrz-16exdaYv8e7zuGotUo5VK6FYwkIv2BK4q1B4R8SlFsYNn65cWgc6KKXxN0vSUgJenRbV0eeJx5MSJQR3YH4kJx8edK4ALLTBtJrVwaevMZVaSN92Uil43sGHdIQol9zlSlYeLngsDVdcazb7TxxWYbB1HcYhczSvO524sWuolN9eLG_VZF4MTbvrnHd-ENyv4X6vOsU1qprK8nuXf14oSb2mRUjQ';
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
@@ -1269,6 +1271,7 @@ class SpotifyComponent {
                 while (count < max_songs && count < num_of_tracks) {
                     let id = data.tracks.items[count].id;
                     let src_str = `https://open.spotify.com/embed/track/${id}`;
+                    console.log("Lien = " + src_str);
                     /* TEST */
                     jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
                         url: src_str,
