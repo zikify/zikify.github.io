@@ -378,65 +378,80 @@ __webpack_require__.r(__webpack_exports__);
 
 class LyricsComponent {
     constructor() { }
-    ngOnInit() {
-    }
-    // Pour rechercher les paroles 
-    findLyrics() {
+    ngOnInit() { }
+    // Recherche les paroles et le clip vidéo d'une chanson 
+    findLyricsAndMusicVideo() {
+        // Recherche des paroles de la chanson (API lyrics.ovh)
         var artiste = document.getElementById("artiste").value;
         var titre = document.getElementById("titre").value;
+        console.log("Recherche des paroles de la chanson " + artiste + " - " + titre);
         jquery__WEBPACK_IMPORTED_MODULE_0__["get"]("https://api.lyrics.ovh/v1/" + artiste + "/" + titre, function (data) {
+            console.log(data);
+            document.getElementById("titreCarteParoles").innerHTML = "Paroles<br> " + artiste.charAt(0).toUpperCase() + artiste.slice(1) + " - " + titre.charAt(0).toUpperCase() + titre.slice(1);
             document.getElementById("paroles").innerHTML = data.lyrics.replace(new RegExp("\n\n", "g"), "<br>").replace(new RegExp("\n", "g"), "<br>");
         });
+        // Recherche du clip vidéo sur Youtube (API youtube) - Attention au quota : 10.000 unités par jour 
+        var API_KEY = "AIzaSyAEYuH3N5p_Xfv6LnV3xjWhN9096AjsZA4";
+        var video = "";
+        var requete = titre + " " + artiste;
+        console.log("recherche vidéo pour " + requete);
+        jquery__WEBPACK_IMPORTED_MODULE_0__["get"]("https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&type=video&part=snippet&maxResults=" + 1 + "&q=" + requete, function (data) {
+            data.items.forEach(item => {
+                video = `<iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>`;
+                document.getElementById("videos").innerHTML = video;
+            });
+        });
     }
-    // Pour faire des suggestions 
-    suggestions() {
-        var term = document.getElementById("searchInput").value;
-        var results = jquery__WEBPACK_IMPORTED_MODULE_0__('#results');
-        if (!term) {
+    // Recherche de suggestions à partir d'un titre et/ou un artiste (API lyrics.ovh)
+    findSuggestions() {
+        var recherche = document.getElementById("rechercheSuggestionInput").value;
+        var zoneSuggestions = jquery__WEBPACK_IMPORTED_MODULE_0__('#suggestions');
+        if (!recherche) {
             return;
         }
-        console.log("Search suggestions for", term);
-        jquery__WEBPACK_IMPORTED_MODULE_0__["getJSON"]('https://api.lyrics.ovh/' + '/suggest/' + term, function (data) {
+        console.log("Cherche des suggestions pour la recherche : ", recherche);
+        jquery__WEBPACK_IMPORTED_MODULE_0__["getJSON"]('https://api.lyrics.ovh/' + '/suggest/' + recherche, function (data) {
             var finalResults = [];
             var seenResults = [];
-            document.getElementById("results").innerHTML = "";
-            data.data.forEach(function (result) {
+            document.getElementById("suggestions").innerHTML = "";
+            data.data.forEach(function (resultat) {
+                // On récupère 5 suggestions. 
                 if (seenResults.length >= 5) {
                     return;
                 }
-                var t = result.title + ' - ' + result.artist.name;
-                if (seenResults.indexOf(t) >= 0) {
+                var suggestion = resultat.artist.name + ' - ' + resultat.title;
+                if (seenResults.indexOf(suggestion) >= 0) {
                     return;
                 }
-                seenResults.push(t);
+                seenResults.push(suggestion);
                 finalResults.push({
-                    display: t,
-                    artist: result.artist.name,
-                    title: result.title
+                    display: suggestion,
+                    artist: resultat.artist.name,
+                    title: resultat.title
                 });
             });
-            finalResults.forEach(function (result, i) {
-                console.log(result.title);
-                console.log(result.artist);
-                var e = jquery__WEBPACK_IMPORTED_MODULE_0__('<p class="suggestion' + i + '"> <a class="badge badge-info" href="#" >' + result.display + '</a></p>');
-                results.append(e);
-                jquery__WEBPACK_IMPORTED_MODULE_0__("#results").on("click", ".suggestion0", function (event) {
+            finalResults.forEach(function (resultat, i) {
+                console.log(resultat.title);
+                console.log(resultat.artist);
+                var s = jquery__WEBPACK_IMPORTED_MODULE_0__('<p class="suggestion' + i + '"> <a class="badge badge-info" href="#" >' + resultat.display + '</a></p>');
+                zoneSuggestions.append(s);
+                jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion0", function (event) {
                     document.getElementById("titre").value = finalResults[0].title;
                     document.getElementById("artiste").value = finalResults[0].artist;
                 });
-                jquery__WEBPACK_IMPORTED_MODULE_0__("#results").on("click", ".suggestion1", function (event) {
+                jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion1", function (event) {
                     document.getElementById("titre").value = finalResults[1].title;
                     document.getElementById("artiste").value = finalResults[1].artist;
                 });
-                jquery__WEBPACK_IMPORTED_MODULE_0__("#results").on("click", ".suggestion2", function (event) {
+                jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion2", function (event) {
                     document.getElementById("titre").value = finalResults[2].title;
                     document.getElementById("artiste").value = finalResults[2].artist;
                 });
-                jquery__WEBPACK_IMPORTED_MODULE_0__("#results").on("click", ".suggestion3", function (event) {
+                jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion3", function (event) {
                     document.getElementById("titre").value = finalResults[3].title;
                     document.getElementById("artiste").value = finalResults[3].artist;
                 });
-                jquery__WEBPACK_IMPORTED_MODULE_0__("#results").on("click", ".suggestion4", function (event) {
+                jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion4", function (event) {
                     document.getElementById("titre").value = finalResults[4].title;
                     document.getElementById("artiste").value = finalResults[4].artist;
                 });
@@ -445,54 +460,79 @@ class LyricsComponent {
     }
 }
 LyricsComponent.ɵfac = function LyricsComponent_Factory(t) { return new (t || LyricsComponent)(); };
-LyricsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: LyricsComponent, selectors: [["app-lyrics"]], decls: 29, vars: 0, consts: [[1, "row"], [1, "col-lg-3"], [1, "card", "text-center", 2, "width", "30rem"], [1, "card-body"], ["id", "artiste", "required", ""], ["id", "titre", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], ["id", "searchInput"], ["id", "results", 1, "results"], [1, "col-lg-1"], [1, "col-lg-8"], [1, "card"], ["id", "titreParoles", 1, "card-title"], ["id", "paroles", 1, "card-text"]], template: function LyricsComponent_Template(rf, ctx) { if (rf & 1) {
+LyricsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: LyricsComponent, selectors: [["app-lyrics"]], decls: 46, vars: 0, consts: [[1, "row"], [1, "col-lg-3"], [1, "card", "text-center", 2, "width", "30rem"], [1, "card-body"], ["id", "titreCartes", 1, "card-title"], [1, "card-subtitle", "mb-2", "text-muted"], ["id", "texteSaisie"], ["id", "artiste", "required", ""], ["id", "titre", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], ["id", "rechercheSuggestionInput", "required", ""], ["id", "suggestions", 1, "suggestions"], ["id", "videos", 1, "videos"], [1, "tim-icons", "icon-double-right"], [1, "col-lg-1"], [1, "col-lg-8"], [1, "card", "text-center", 2, "width", "60rem"], ["id", "titreCarteParoles", 1, "card-title"], ["id", "paroles", 1, "card-text"]], template: function LyricsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "h4");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, " Saisir l'artiste : ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](6, "input", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "h4", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](5, "Envie de connaitre les paroles d'une chanson ?");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](7, "br");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "h4");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, " Saisir le titre : ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](10, "input", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](6, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "h6", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Soyez pr\u00E9cis dans l'orthographe");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "br");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "button", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_12_listener() { return ctx.findLyrics(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, " Chercher les paroles");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](9, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "h4", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, " Saisir l'artiste : ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "input", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "h4", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](15, " Saisir le titre : ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](16, "input", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "h4");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](17, " Saisir le titre et l'artiste : ");
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](18, "input", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "ul", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "button", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_20_listener() { return ctx.suggestions(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, " Chercher suggestions ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](17, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "button", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_18_listener() { return ctx.findLyricsAndMusicVideo(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, " Chercher les paroles");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](20, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](22, "h4", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "Besoin d'une suggestion ?");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](22, "div", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](23, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "h4", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](27, "Paroles");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "h4", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](25, " Saisir un titre et/ou un artiste : ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](26, "input", 10);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](28, "p", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](27, "ul", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "button", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_28_listener() { return ctx.findSuggestions(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](29, " Chercher suggestions ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-    } }, styles: ["#paroles[_ngcontent-%COMP%] {\n  color: white;\n  font-size: 17px;\n}\n\n#results[_ngcontent-%COMP%] {\n  color: white;\n  text-align: center;\n}\n\n#titreParoles[_ngcontent-%COMP%] {\n  font-size: 30px;\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxseXJpY3MuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0VBQ0EsZUFBQTtBQUNKOztBQUNBO0VBQ0ksWUFBQTtFQUNBLGtCQUFBO0FBRUo7O0FBQ0E7RUFDSSxlQUFBO0VBQ0EsWUFBQTtBQUVKIiwiZmlsZSI6Imx5cmljcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNwYXJvbGVzIHtcclxuICAgIGNvbG9yOiB3aGl0ZTsgXHJcbiAgICBmb250LXNpemU6IDE3cHg7IFxyXG59XHJcbiNyZXN1bHRzIHtcclxuICAgIGNvbG9yOiB3aGl0ZTsgXHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbiN0aXRyZVBhcm9sZXMge1xyXG4gICAgZm9udC1zaXplIDogMzBweDsgXHJcbiAgICBjb2xvcjogd2hpdGU7IFxyXG59Il19 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "h4", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](33, "Clip Youtube");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](35, "i", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, " Si vous cherchez les paroles d'une chanson, son clip appara\u00EEtra ici ! ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](37, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](38, "div", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](39, "div", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](41, "h4", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](42, "Paroles");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](43, "p", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](44, "i", 13);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](45, " Les paroles de la chanson recherch\u00E9e appara\u00EEtront ici. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    } }, styles: ["#paroles[_ngcontent-%COMP%] {\n  color: white;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n  font-size: 20px;\n}\n\n#suggestions[_ngcontent-%COMP%] {\n  color: white;\n  text-align: center;\n}\n\n#video[_ngcontent-%COMP%] {\n  color: white;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n  text-align: center;\n  font-size: 20px;\n}\n\n#titreCartes[_ngcontent-%COMP%] {\n  font-size: 23px;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n  color: #4ee4f1;\n}\n\n#titreCarteParoles[_ngcontent-%COMP%] {\n  font-size: 23px;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n  color: #4ee4f1;\n}\n\n#texteSaisie[_ngcontent-%COMP%] {\n  color: white;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n  font-size: 20px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxseXJpY3MuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFBO0VBQ0EscUdBQUE7RUFDQSxlQUFBO0FBQ0o7O0FBQ0E7RUFDSSxZQUFBO0VBQ0Esa0JBQUE7QUFFSjs7QUFBQTtFQUNJLFlBQUE7RUFDQSxxR0FBQTtFQUNBLGtCQUFBO0VBQ0EsZUFBQTtBQUdKOztBQURBO0VBQ0ksZUFBQTtFQUNBLHFHQUFBO0VBQ0EsY0FBQTtBQUlKOztBQUZBO0VBQ0ksZUFBQTtFQUNBLHFHQUFBO0VBQ0EsY0FBQTtBQUtKOztBQUhBO0VBQ0ksWUFBQTtFQUNBLHFHQUFBO0VBQ0EsZUFBQTtBQU1KIiwiZmlsZSI6Imx5cmljcy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNwYXJvbGVzIHtcclxuICAgIGNvbG9yOiB3aGl0ZTsgXHJcbiAgICBmb250LWZhbWlseTonVHJlYnVjaGV0IE1TJywgJ0x1Y2lkYSBTYW5zIFVuaWNvZGUnLCAnTHVjaWRhIEdyYW5kZScsICdMdWNpZGEgU2FucycsIEFyaWFsLCBzYW5zLXNlcmlmO1xyXG4gICAgZm9udC1zaXplOiAyMHB4OyBcclxufVxyXG4jc3VnZ2VzdGlvbnMge1xyXG4gICAgY29sb3I6IHdoaXRlOyBcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG4jdmlkZW8ge1xyXG4gICAgY29sb3I6IHdoaXRlOyBcclxuICAgIGZvbnQtZmFtaWx5OidUcmVidWNoZXQgTVMnLCAnTHVjaWRhIFNhbnMgVW5pY29kZScsICdMdWNpZGEgR3JhbmRlJywgJ0x1Y2lkYSBTYW5zJywgQXJpYWwsIHNhbnMtc2VyaWY7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxyXG4gICAgZm9udC1zaXplOiAyMHB4OyBcclxufVxyXG4jdGl0cmVDYXJ0ZXMge1xyXG4gICAgZm9udC1zaXplIDogMjNweDsgXHJcbiAgICBmb250LWZhbWlseTonVHJlYnVjaGV0IE1TJywgJ0x1Y2lkYSBTYW5zIFVuaWNvZGUnLCAnTHVjaWRhIEdyYW5kZScsICdMdWNpZGEgU2FucycsIEFyaWFsLCBzYW5zLXNlcmlmO1xyXG4gICAgY29sb3I6IHJnYig3OCwgMjI4LCAyNDEpOyBcclxufVxyXG4jdGl0cmVDYXJ0ZVBhcm9sZXN7XHJcbiAgICBmb250LXNpemUgOiAyM3B4OyBcclxuICAgIGZvbnQtZmFtaWx5OidUcmVidWNoZXQgTVMnLCAnTHVjaWRhIFNhbnMgVW5pY29kZScsICdMdWNpZGEgR3JhbmRlJywgJ0x1Y2lkYSBTYW5zJywgQXJpYWwsIHNhbnMtc2VyaWY7XHJcbiAgICBjb2xvcjogcmdiKDc4LCAyMjgsIDI0MSk7XHJcbn1cclxuI3RleHRlU2Fpc2lle1xyXG4gICAgY29sb3I6IHdoaXRlOyBcclxuICAgIGZvbnQtZmFtaWx5OidUcmVidWNoZXQgTVMnLCAnTHVjaWRhIFNhbnMgVW5pY29kZScsICdMdWNpZGEgR3JhbmRlJywgJ0x1Y2lkYSBTYW5zJywgQXJpYWwsIHNhbnMtc2VyaWY7XHJcbiAgICBmb250LXNpemU6IDIwcHg7IFxyXG59Il19 */"] });
 
 
 /***/ }),
@@ -543,7 +583,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 9.9 TEST TITRE ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 10 CSS SPOTIFY + LYRICS UPDATE ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r5.loginSpotify(); });
@@ -1212,7 +1252,8 @@ class SpotifyComponent {
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
-        let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#search-text').val();
+        //let raw_search_query = $('#search-text').val();
+        let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#son').val();
         raw_search_query = raw_search_query.toString();
         let search_query = encodeURI(raw_search_query);
         jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
@@ -1238,30 +1279,33 @@ class SpotifyComponent {
     }
 }
 SpotifyComponent.ɵfac = function SpotifyComponent_Factory(t) { return new (t || SpotifyComponent)(); };
-SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 18, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], [1, "card-body"], [1, "recherche"], ["type", "text", "name", "", "id", "search-text", "placeholder", "Saisir un titre / artiste", 1, "recherche-txt"], ["type", "button", 1, "recherche-btn", 3, "click"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
+SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 20, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], ["id", "son", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], [1, "card-body"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "input", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "button", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function SpotifyComponent_Template_button_click_6_listener() { return ctx.chercherSons(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, "Rechercher");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "h4");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, " Saisir artiste / titre : \u00A0 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "input", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, " \u00A0 \u00A0 \u00A0 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "button", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function SpotifyComponent_Template_button_click_7_listener() { return ctx.chercherSons(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, " Rechercher ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "div", 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](10, "div", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "div", 10);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](14, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](12, "div", 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](15, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](16, "div", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](17, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](15, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](16, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](18, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
