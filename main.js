@@ -583,7 +583,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION 10.3 JSON SPOTIFY ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " VERSION STABLE ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r5.loginSpotify(); });
@@ -693,7 +693,6 @@ class AccueilComponent {
         this.isVisibleSpotify = false;
         this.isVisibleLyrics = false;
         this.isConnected = false;
-        this.token = this.token = 'BQAu2U5Kp00XXa4m_gg4WhxvDf4MTywmqRh2Mq6eEjeeZsxFF3UBVgZ8P0lwrz-16exdaYv8e7zuGotUo5VK6FYwkIv2BK4q1B4R8SlFsYNn65cWgc6KKXxN0vSUgJenRbV0eeJx5MSJQR3YH4kJx8edK4ALLTBtJrVwaevMZVaSN92Uil43sGHdIQol9zlSlYeLngsDVdcazb7TxxWYbB1HcYhczSvO524sWuolN9eLG_VZF4MTbvrnHd-ENyv4X6vOsU1qprK8nuXf14oSb2mRUjQ';
         /*
         if (this.token == null){
           console.log("isCONNECTED = FALSE");
@@ -1250,11 +1249,9 @@ __webpack_require__.r(__webpack_exports__);
 class SpotifyComponent {
     constructor() { }
     ngOnInit() {
-        this.token = 'BQAu2U5Kp00XXa4m_gg4WhxvDf4MTywmqRh2Mq6eEjeeZsxFF3UBVgZ8P0lwrz-16exdaYv8e7zuGotUo5VK6FYwkIv2BK4q1B4R8SlFsYNn65cWgc6KKXxN0vSUgJenRbV0eeJx5MSJQR3YH4kJx8edK4ALLTBtJrVwaevMZVaSN92Uil43sGHdIQol9zlSlYeLngsDVdcazb7TxxWYbB1HcYhczSvO524sWuolN9eLG_VZF4MTbvrnHd-ENyv4X6vOsU1qprK8nuXf14oSb2mRUjQ';
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
-        //let raw_search_query = $('#search-text').val();
         let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#son').val();
         raw_search_query = raw_search_query.toString();
         let search_query = encodeURI(raw_search_query);
@@ -1271,19 +1268,6 @@ class SpotifyComponent {
                 while (count < max_songs && count < num_of_tracks) {
                     let id = data.tracks.items[count].id;
                     let src_str = `https://open.spotify.com/embed/track/${id}`;
-                    console.log("Lien = " + src_str);
-                    /* TEST */
-                    jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
-                        url: src_str,
-                        type: 'GET',
-                        headers: {
-                            'Authorization': 'Bearer ' + this.token
-                        },
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
-                    /* TEST */
                     let iframe = `<div class='song'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
                     let parent_div = jquery__WEBPACK_IMPORTED_MODULE_0__('#song_' + count);
                     parent_div.html(iframe);
