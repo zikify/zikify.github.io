@@ -1378,7 +1378,8 @@ class SpotifyComponent {
         spotifyApi.setAccessToken(this.token);
         console.log(spotifyApi.getMe());
         let res = spotifyApi.getMe();
-        document.getElementById("nom_user").innerHTML = "Bienvenue sur ZikiFy : " + res['__zone_symbol__value']['display_name'];
+        console.log("NOM = " + res["__zone_symbol__value"]["display_name"]);
+        document.getElementById("nom_user").innerHTML = "Bienvenue sur ZikiFy : " + res["__zone_symbol__value"]["display_name"];
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
