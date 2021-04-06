@@ -641,7 +641,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST API SPOTIFY LOCAL ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " JOIE ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.loginSpotify(); });
@@ -1369,18 +1369,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const Spotify = __webpack_require__(/*! spotify-web-api-js */ "vo2P");
+const s = new Spotify();
+const spotifyApi = new spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default.a();
 class SpotifyComponent {
     constructor() { }
     ngOnInit() {
-        var Spotify = __webpack_require__(/*! spotify-web-api-js */ "vo2P");
-        var s = new Spotify();
-        let spotifyApi = new spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default.a();
         spotifyApi.setAccessToken(this.token);
-        spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(function (data) {
-            console.log('Artist albums', data);
-        }, function (err) {
-            console.error(err);
-        });
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
@@ -1397,16 +1392,17 @@ class SpotifyComponent {
                 'Authorization': 'Bearer ' + this.token
             },
             success: function (data) {
-                /* AJOUT */
-                console.log("DONNEES RECUS = " + data);
-                /* AJOUT */
                 let num_of_tracks = data.tracks.items.length;
                 let count = 0;
                 const max_songs = 8;
                 while (count < max_songs && count < num_of_tracks) {
                     let id = data.tracks.items[count].id;
                     /* AJOUT */
-                    //afficherInfos(app);
+                    spotifyApi.getTrack(id).then(function (data) {
+                        console.log(data);
+                    }, function (err) {
+                        console.error(err);
+                    });
                     let src_str = `https://open.spotify.com/embed/track/${id}`;
                     let iframe = `<div class='song'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
                     let parent_div = jquery__WEBPACK_IMPORTED_MODULE_0__('#song_' + count);
