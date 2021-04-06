@@ -641,7 +641,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " FC KEKRA ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.loginSpotify(); });
@@ -1377,7 +1377,7 @@ class SpotifyComponent {
     ngOnInit() {
         spotifyApi.setAccessToken(this.token);
         console.log(spotifyApi.getMe());
-        document.getElementById("nom_user").innerHTML = "Bienvenue sur ZikiFy : " + spotifyApi.getMe()['display_name'];
+        document.getElementById("nom_user").innerHTML = "Bienvenue sur ZikiFy : " + spotifyApi.getMe('display_name');
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
@@ -1415,10 +1415,26 @@ class SpotifyComponent {
         });
     }
     volume0() {
-        spotifyApi.setVolume(0);
+        //spotifyApi.setVolume(0);
+        jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+            url: `https://api.spotify.com/v1/me/player/0`,
+            type: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + this.token
+            },
+        });
+        // PUT https://api.spotify.com/v1/me/player/0
     }
     volume20() {
-        spotifyApi.setVolume(20);
+        jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
+            url: `https://api.spotify.com/v1/me/player/20`,
+            type: 'PUT',
+            headers: {
+                'Authorization': 'Bearer ' + this.token
+            },
+        });
+        //spotifyApi.setVolume(20);
+        // PUT https://api.spotify.com/v1/me/player/20
     }
 }
 SpotifyComponent.ɵfac = function SpotifyComponent_Factory(t) { return new (t || SpotifyComponent)(); };
