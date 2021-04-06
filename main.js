@@ -638,13 +638,13 @@ function AccueilComponent_div_0_div_12_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST MATHILDE + SPOTIFY ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST API SPOTIFY LOCAL ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r5.loginSpotify(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.loginSpotify(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "CONNEXION");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "br");
@@ -653,7 +653,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "button", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_10_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r7.accederSpotify(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_10_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.accederSpotify(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, AccueilComponent_div_0_div_11_Template, 8, 0, "div", 6);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, AccueilComponent_div_0_div_12_Template, 8, 0, "div", 7);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -662,7 +662,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "button", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.accederLyrics(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r9.accederLyrics(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 8);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 10);
@@ -684,7 +684,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "button", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_27_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r9.accederInfos(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_27_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r10.accederInfos(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div", 13);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div", 10);
@@ -704,7 +704,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "button", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_38_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6); const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r10.accederConcert(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_38_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.accederConcert(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](39, "div", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "div", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](41, "div", 10);
@@ -741,6 +741,11 @@ function AccueilComponent_form_1_Template(rf, ctx) { if (rf & 1) {
 } }
 function AccueilComponent_form_2_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-concert");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function AccueilComponent_form_3_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "form");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-lyrics");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "app-contact");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -752,6 +757,7 @@ class AccueilComponent {
         this.isVisibleSpotify = false;
         this.isVisibleLyrics = false;
         this.isConnected = false;
+        this.isVisibleConcert = false;
         /*
         if (this.token == null){
           console.log("isCONNECTED = FALSE");
@@ -776,6 +782,7 @@ class AccueilComponent {
     }
     accederConcert() {
         this.hide();
+        this.isVisibleConcert = true;
     }
     accederLyrics() {
         this.hide();
@@ -825,14 +832,17 @@ class AccueilComponent {
     }
 }
 AccueilComponent.ɵfac = function AccueilComponent_Factory(t) { return new (t || AccueilComponent)(); };
-AccueilComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccueilComponent, selectors: [["app-accueil"]], inputs: { token: "token", isConnected: "isConnected" }, decls: 3, vars: 3, consts: [[4, "ngIf"], [1, "bienvenue"], ["type", "button", 1, "btn-default", "animation-on-hover", 3, "click"], [1, "row"], [1, "col-lg-6"], [1, "card", "card-chart"], ["class", "carte-spotify", 4, "ngIf"], ["class", "carte-concert", 4, "ngIf"], [1, "carte-lyrics"], [1, "card-header"], [1, "titre-carte"], [1, "card-body"], [1, "contenu-carte"], [1, "carte-infos"], [1, "carte-concert"], [1, "carte-spotify"], [3, "token"]], template: function AccueilComponent_Template(rf, ctx) { if (rf & 1) {
+AccueilComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AccueilComponent, selectors: [["app-accueil"]], inputs: { token: "token", isConnected: "isConnected" }, decls: 4, vars: 4, consts: [[4, "ngIf"], [1, "bienvenue"], ["type", "button", 1, "btn-default", "animation-on-hover", 3, "click"], [1, "row"], [1, "col-lg-6"], [1, "card", "card-chart"], ["class", "carte-spotify", 4, "ngIf"], ["class", "carte-concert", 4, "ngIf"], [1, "carte-lyrics"], [1, "card-header"], [1, "titre-carte"], [1, "card-body"], [1, "contenu-carte"], [1, "carte-infos"], [1, "carte-concert"], [1, "carte-spotify"], [3, "token"]], template: function AccueilComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, AccueilComponent_div_0_Template, 47, 2, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, AccueilComponent_form_1_Template, 2, 1, "form", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, AccueilComponent_form_2_Template, 3, 0, "form", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, AccueilComponent_form_2_Template, 2, 0, "form", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AccueilComponent_form_3_Template, 3, 0, "form", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.isVisibleAccueil);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.isVisibleSpotify);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.isVisibleConcert);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.isVisibleLyrics);
     } }, styles: [".bienvenue[_ngcontent-%COMP%] {\n  color: white;\n  font-size: 60px;\n  text-align: center;\n  font-weight: bold;\n  font-family: \"Trebuchet MS\", \"Lucida Sans Unicode\", \"Lucida Grande\", \"Lucida Sans\", Arial, sans-serif;\n}\n\n.carte-concert[_ngcontent-%COMP%] {\n  background-color: #d67972;\n  background: #ce584f;\n  background: linear-gradient(0deg, #ce584f 0%, #d67972 100%);\n}\n\n.carte-concert[_ngcontent-%COMP%]:hover {\n  border: 2mm solid #0099ff;\n}\n\n.carte-infos[_ngcontent-%COMP%] {\n  background-color: #f8f88e;\n  background: #f0f04e;\n  background: linear-gradient(0deg, #f0f04e 0%, #f8f88e 100%);\n}\n\n.carte-infos[_ngcontent-%COMP%]:hover {\n  border: 2mm solid #0099ff;\n}\n\n.carte-lyrics[_ngcontent-%COMP%] {\n  background: #0f87a5;\n  background: linear-gradient(0deg, #0f87a5 0%, #91c8d6 100%);\n}\n\n.carte-lyrics[_ngcontent-%COMP%]:hover {\n  border: 2mm solid #0099ff;\n}\n\n.carte-spotify[_ngcontent-%COMP%] {\n  background: #7bce44;\n  background: linear-gradient(0deg, #7bce44 0%, #b2e292 100%);\n}\n\n.carte-spotify[_ngcontent-%COMP%]:hover {\n  border: 2mm solid #0099ff;\n}\n\n.contenu-carte[_ngcontent-%COMP%] {\n  color: black;\n  font-size: 15px;\n  text-align: center;\n  font-weight: bold;\n}\n\n.titre-carte[_ngcontent-%COMP%] {\n  font-size: 30px;\n  color: black;\n  text-decoration: underline;\n  text-align: center;\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxhY2N1ZWlsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EscUdBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQ0EsbUJBQUE7RUFJQSwyREFBQTtBQUNKOztBQUVBO0VBQ0kseUJBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQ0EsbUJBQUE7RUFJQSwyREFBQTtBQUNKOztBQUVBO0VBQ0kseUJBQUE7QUFDSjs7QUFFQTtFQUNJLG1CQUFBO0VBSUEsMkRBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxtQkFBQTtFQUlBLDJEQUFBO0FBQ0o7O0FBRUE7RUFDSSx5QkFBQTtBQUNKOztBQUVBO0VBQ0ksWUFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxlQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTtBQUNKIiwiZmlsZSI6ImFjY3VlaWwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYmllbnZlbnVle1xyXG4gICAgY29sb3I6IHdoaXRlO1xyXG4gICAgZm9udC1zaXplOiA2MHB4O1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyOyBcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkOyBcclxuICAgIGZvbnQtZmFtaWx5OiAnVHJlYnVjaGV0IE1TJywgJ0x1Y2lkYSBTYW5zIFVuaWNvZGUnLCAnTHVjaWRhIEdyYW5kZScsICdMdWNpZGEgU2FucycsIEFyaWFsLCBzYW5zLXNlcmlmO1xyXG59XHJcblxyXG4uY2FydGUtY29uY2VydHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNkNjc5NzI7XHJcbiAgICBiYWNrZ3JvdW5kOiAjY2U1ODRmO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQoMGRlZywgI2NlNTg0ZiAwJSwjZDY3OTcyIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KDBkZWcsICNjZTU4NGYgMCUsI2Q2Nzk3MiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KDBkZWcsICNjZTU4NGYgMCUsI2Q2Nzk3MiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgwZGVnLCAjY2U1ODRmIDAlLCAjZDY3OTcyIDEwMCUpO1xyXG59XHJcblxyXG4uY2FydGUtY29uY2VydDpob3ZlciB7XHJcbiAgICBib3JkZXI6IDJtbSBzb2xpZCByZ2JhKCRjb2xvcjogIzAwOTlmZiwgJGFscGhhOiAxLjApO1xyXG59XHJcblxyXG4uY2FydGUtaW5mb3N7ICAgIFxyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogI2Y4Zjg4ZTtcclxuICAgIGJhY2tncm91bmQ6ICNmMGYwNGU7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgwZGVnLCAjZjBmMDRlIDAlLCAjZjhmODhlIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KDBkZWcsICNmMGYwNGUgMCUsICNmOGY4OGUgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCgwZGVnLCAjZjBmMDRlIDAlLCAjZjhmODhlIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDBkZWcsICNmMGYwNGUgMCUsICNmOGY4OGUgMTAwJSk7XHJcbn1cclxuXHJcbi5jYXJ0ZS1pbmZvczpob3ZlciB7XHJcbiAgICBib3JkZXI6IDJtbSBzb2xpZCByZ2JhKCRjb2xvcjogIzAwOTlmZiwgJGFscGhhOiAxLjApO1xyXG59XHJcblxyXG4uY2FydGUtbHlyaWNzIHtcclxuICAgIGJhY2tncm91bmQ6ICMwZjg3YTU7XHJcbiAgICBiYWNrZ3JvdW5kOiAtd2Via2l0LWxpbmVhci1ncmFkaWVudCgwZGVnLCAjMGY4N2E1IDAlLCAjOTFjOGQ2IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLW8tbGluZWFyLWdyYWRpZW50KDBkZWcsICMwZjg3YTUgMCUsICM5MWM4ZDYgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtbW96LWxpbmVhci1ncmFkaWVudCgwZGVnLCAjMGY4N2E1IDAlLCAjOTFjOGQ2IDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDBkZWcsICMwZjg3YTUgMCUsICM5MWM4ZDYgMTAwJSk7XHJcbn1cclxuXHJcbi5jYXJ0ZS1seXJpY3M6aG92ZXIge1xyXG4gICAgYm9yZGVyOiAybW0gc29saWQgcmdiYSgkY29sb3I6ICMwMDk5ZmYsICRhbHBoYTogMS4wKTtcclxufVxyXG5cclxuLmNhcnRlLXNwb3RpZnkge1xyXG4gICAgYmFja2dyb3VuZDogIzdiY2U0NDtcclxuICAgIGJhY2tncm91bmQ6IC13ZWJraXQtbGluZWFyLWdyYWRpZW50KDBkZWcsICM3YmNlNDQgMCUsICNiMmUyOTIgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiAtby1saW5lYXItZ3JhZGllbnQoMGRlZywgIzdiY2U0NCAwJSwgI2IyZTI5MiAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC1tb3otbGluZWFyLWdyYWRpZW50KDBkZWcsICM3YmNlNDQgMCUsICNiMmUyOTIgMTAwJSk7XHJcbiAgICBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMGRlZywgIzdiY2U0NCAwJSwgI2IyZTI5MiAxMDAlKTtcclxufVxyXG5cclxuLmNhcnRlLXNwb3RpZnk6aG92ZXIge1xyXG4gICAgYm9yZGVyOiAybW0gc29saWQgcmdiYSgkY29sb3I6ICMwMDk5ZmYsICRhbHBoYTogMS4wKTtcclxufVxyXG5cclxuLmNvbnRlbnUtY2FydGV7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICBmb250LXNpemU6IDE1cHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7IFxyXG59XHJcblxyXG4udGl0cmUtY2FydGV7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsgXHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn0iXX0= */"] });
@@ -1040,6 +1050,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵdefineInjecto
         _components_menu_menu_component__WEBPACK_IMPORTED_MODULE_10__["MenuComponent"],
         _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_11__["ContactComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]] }); })();
 _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵsetComponentScope"](_components_accueil_accueil_component__WEBPACK_IMPORTED_MODULE_7__["AccueilComponent"], [_angular_common__WEBPACK_IMPORTED_MODULE_13__["NgIf"], _components_spotify_spotify_component__WEBPACK_IMPORTED_MODULE_2__["SpotifyComponent"],
+    _components_concert_concert_component__WEBPACK_IMPORTED_MODULE_5__["ConcertComponent"],
     _components_lyrics_lyrics_component__WEBPACK_IMPORTED_MODULE_3__["LyricsComponent"],
     _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_11__["ContactComponent"]], []);
 
@@ -1350,10 +1361,10 @@ ConcertComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineC
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SpotifyComponent", function() { return SpotifyComponent; });
-/* harmony import */ var angular_spotify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! angular-spotify */ "r3dx");
-/* harmony import */ var angular_spotify__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(angular_spotify__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "EVdn");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "EVdn");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! spotify-web-api-js */ "vo2P");
+/* harmony import */ var spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 
 
@@ -1361,22 +1372,25 @@ __webpack_require__.r(__webpack_exports__);
 class SpotifyComponent {
     constructor() { }
     ngOnInit() {
+        var Spotify = __webpack_require__(/*! spotify-web-api-js */ "vo2P");
+        var s = new Spotify();
+        let spotifyApi = new spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default.a();
+        spotifyApi.setAccessToken(this.token);
+        spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE').then(function (data) {
+            console.log('Artist albums', data);
+        }, function (err) {
+            console.error(err);
+        });
         console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
         /* AJOUT */
-        var app = angular_spotify__WEBPACK_IMPORTED_MODULE_0__["angular"].module('example', ['spotify']);
-        app.config(function (SpotifyProvider) {
-            SpotifyProvider.setClientId('706e363542db4c55bbce2c8a1a13d50d');
-            SpotifyProvider.setRedirectUri('https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&redirect_uri=${redirect_uri}');
-            SpotifyProvider.setScope('user-read-private playlist-read-private playlist-modify-private playlist-modify-public');
-            SpotifyProvider.setAuthToken(this.token);
-        });
-        /* AJOUT */
-        let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_1__('#son').val();
+        //var app = seCharger();
+        // app = seConnecter();
+        let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#son').val();
         raw_search_query = raw_search_query.toString();
         let search_query = encodeURI(raw_search_query);
-        jquery__WEBPACK_IMPORTED_MODULE_1__["ajax"]({
+        jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
             url: `https://api.spotify.com/v1/search?q=${search_query}&type=track`,
             type: 'GET',
             headers: {
@@ -1392,13 +1406,10 @@ class SpotifyComponent {
                 while (count < max_songs && count < num_of_tracks) {
                     let id = data.tracks.items[count].id;
                     /* AJOUT */
-                    app.getTrack(id).then(function (dataa) {
-                        console.log(dataa);
-                    });
-                    /* AJOUT */
+                    //afficherInfos(app);
                     let src_str = `https://open.spotify.com/embed/track/${id}`;
                     let iframe = `<div class='song'><iframe src=${src_str} frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>`;
-                    let parent_div = jquery__WEBPACK_IMPORTED_MODULE_1__('#song_' + count);
+                    let parent_div = jquery__WEBPACK_IMPORTED_MODULE_0__('#song_' + count);
                     parent_div.html(iframe);
                     count++;
                 }
@@ -1407,7 +1418,7 @@ class SpotifyComponent {
     }
 }
 SpotifyComponent.ɵfac = function SpotifyComponent_Factory(t) { return new (t || SpotifyComponent)(); };
-SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 23, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], ["id", "son", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], [1, "card-body"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"], ["id", "song_6", 1, "col"], ["id", "song_7", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
+SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: SpotifyComponent, selectors: [["app-spotify"]], inputs: { token: "token" }, decls: 22, vars: 0, consts: [[1, "col-lg-8"], [1, "card", "card-chart"], [1, "card-header"], ["id", "son", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], [1, "container"], [1, "row"], ["id", "song_0", 1, "col"], ["id", "song_1", 1, "col"], ["id", "song_2", 1, "col"], ["id", "song_3", 1, "col"], ["id", "song_4", 1, "col"], ["id", "song_5", 1, "col"], ["id", "song_6", 1, "col"], ["id", "song_7", 1, "col"]], template: function SpotifyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 2);
@@ -1423,22 +1434,20 @@ SpotifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](9, "div", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](10, "div", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](11, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](11, "div", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](12, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](13, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](14, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](13, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](14, "div", 9);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](15, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](16, "div", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](17, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](16, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](17, "div", 11);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](18, "div", 12);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](19, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "div", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](19, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](20, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](21, "div", 14);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](22, "div", 15);
-        _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
