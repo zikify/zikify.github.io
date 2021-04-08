@@ -755,7 +755,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " APropos + Spotify FIXED ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.loginSpotify(); });
@@ -1777,16 +1777,17 @@ function SpotifyComponent_div_2_Template(rf, ctx) { if (rf & 1) {
 } }
 const Spotify = __webpack_require__(/*! spotify-web-api-js */ "vo2P");
 const s = new Spotify();
-const spotifyApi = new spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default.a();
+let spotify = new spotify_web_api_js__WEBPACK_IMPORTED_MODULE_1___default.a();
 class SpotifyComponent {
     constructor() { }
     ngOnInit() {
-        spotifyApi.setAccessToken(this.token);
-        console.log(spotifyApi.getMe());
-        let res = spotifyApi.getMe();
+        console.log("SPOTIFY-COMPONENT Token = " + this.token);
+        spotify.setAccessToken(this.token);
+        console.log(spotify.getMyTopArtists());
+        console.log(spotify.getMe());
+        let res = spotify.getMe();
         console.log("NOM = " + res["display_name"]);
         document.getElementById("nom_user").innerHTML = "Bienvenue sur ZikiFy : " + res["display_name"];
-        console.log("SPOTIFY-COMPONENT Token = " + this.token);
     }
     chercherSons() {
         let raw_search_query = jquery__WEBPACK_IMPORTED_MODULE_0__('#son').val();
@@ -1805,7 +1806,7 @@ class SpotifyComponent {
                 while (count < max_songs && count < num_of_tracks) {
                     let id = data.tracks.items[count].id;
                     /* AJOUT */
-                    spotifyApi.getTrack(id).then(function (data) {
+                    spotify.getTrack(id).then(function (data) {
                         console.log(data);
                     }, function (err) {
                         console.error(err);
@@ -1821,8 +1822,8 @@ class SpotifyComponent {
     }
     volume0() {
         console.log("VOLUME TOKEN = " + this.token);
-        spotifyApi.setVolume(0);
-        console.log(spotifyApi.setVolume(0));
+        spotify.setVolume(0);
+        console.log(spotify.setVolume(0));
         jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
             url: `https://api.spotify.com/v1/me/player/volume?volume_percent=0&access_token=${this.token}`,
             type: 'PUT',
