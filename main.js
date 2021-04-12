@@ -197,8 +197,10 @@ function MenuComponent_li_16_Template(rf, ctx) { if (rf & 1) {
 } }
 class MenuComponent {
     constructor() {
+        //Envoie d'une information
         this.changementAccueil = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
+    //Initialisation des variables
     ngOnInit() {
         this.activeAccueil = true;
         this.activeSpotify = false;
@@ -208,6 +210,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Fonction permettant de mettre en évidence la session active au niveau du menu
     changementMenu(dir) {
         switch (dir) {
             case "accueil":
@@ -232,6 +235,7 @@ class MenuComponent {
                 break;
         }
     }
+    //Lance l'affichage de la section Accueil
     activerAccueil() {
         this.activeAccueil = true;
         this.activeSpotify = false;
@@ -242,6 +246,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("accueil");
     }
+    //Activation de la section Accueil dans le menu
     activerAccueil_Event() {
         this.activeAccueil = true;
         this.activeSpotify = false;
@@ -251,6 +256,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section Spotify-YouTube
     activerSpotify() {
         this.activeAccueil = false;
         this.activeSpotify = true;
@@ -261,6 +267,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("spotify");
     }
+    //Activation de la section Spotyfy-YouTube dans le menu
     activerSpotify_Event() {
         this.activeAccueil = false;
         this.activeSpotify = true;
@@ -270,6 +277,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section Lyrics
     activerLyrics() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -280,6 +288,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("lyrics");
     }
+    //Activation de la section Lyrics dans le menu
     activerLyrics_Event() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -289,6 +298,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section Infos
     activerInfos() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -299,6 +309,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("infos");
     }
+    //Activation de la section Infos dans le menu
     activerInfos_Event() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -308,6 +319,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section Concert
     activerConcert() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -318,6 +330,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("concert");
     }
+    //Activation de la section Concert dans le menu
     activerConcert_Event() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -327,6 +340,7 @@ class MenuComponent {
         this.activeContact = false;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section Contact
     activerContact() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -337,6 +351,7 @@ class MenuComponent {
         this.activeAPropos = false;
         this.changementAccueil.emit("contact");
     }
+    //Activation de la section Contact dans le menu
     activerContact_Event() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -346,6 +361,7 @@ class MenuComponent {
         this.activeContact = true;
         this.activeAPropos = false;
     }
+    //Lance l'affichage de la section A propos
     activerAPropos() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -356,6 +372,7 @@ class MenuComponent {
         this.activeAPropos = true;
         this.changementAccueil.emit("apropos");
     }
+    //Activation de la section A propos dans le menu
     activerAPropos_Event() {
         this.activeAccueil = false;
         this.activeSpotify = false;
@@ -468,50 +485,49 @@ __webpack_require__.r(__webpack_exports__);
 class LyricsComponent {
     constructor() { }
     ngOnInit() { }
-    // Recherche les paroles et le clip vidéo d'une chanson 
-    findLyricsAndMusicVideo() {
-        // Recherche des paroles de la chanson (API lyrics.ovh)
+    // Recherche les paroles de la chanson (API lyrics.ovh)
+    findLyrics() {
+        // Récupère la valeur saisie par l'utilisateur dans le champ "artiste" 
         var artiste = document.getElementById("artiste").value;
+        // Récupère la valeur saisie par l'utilisateur dans le champ "titre"
         var titre = document.getElementById("titre").value;
-        console.log("Recherche des paroles de la chanson " + artiste + " - " + titre);
+        console.log("Recherche des paroles de la chanson : " + artiste + " - " + titre);
+        // Récupère les paroles de la chanson et les affiche 
         jquery__WEBPACK_IMPORTED_MODULE_0__["get"]("https://api.lyrics.ovh/v1/" + artiste + "/" + titre, function (data) {
             console.log(data);
+            // Actualisation du titre de la carte paroles pour afficher l'artiste et le titre de la chanson 
             document.getElementById("titreCarteParoles").innerHTML = "Paroles<br> " + artiste.charAt(0).toUpperCase() + artiste.slice(1) + " - " + titre.charAt(0).toUpperCase() + titre.slice(1);
+            // Actualisation du bloc paroles pour afficher les paroles de la chanson 
             document.getElementById("paroles").innerHTML = data.lyrics.replace(new RegExp("\n\n", "g"), "<br>").replace(new RegExp("\n", "g"), "<br>");
-        });
-        // Recherche du clip vidéo sur Youtube (API youtube) - Attention au quota : 10.000 unités par jour 
-        var API_KEY = "AIzaSyAEYuH3N5p_Xfv6LnV3xjWhN9096AjsZA4";
-        var video = "";
-        var requete = titre + " " + artiste;
-        console.log("recherche vidéo pour " + requete);
-        jquery__WEBPACK_IMPORTED_MODULE_0__["get"]("https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&type=video&part=snippet&maxResults=" + 1 + "&q=" + requete, function (data) {
-            data.items.forEach(item => {
-                video = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>`;
-                document.getElementById("videos").innerHTML = video;
-            });
         });
     }
     // Recherche de suggestions à partir d'un titre et/ou un artiste (API lyrics.ovh)
     findSuggestions() {
+        // Récupère la demande de l'utilisateur 
         var recherche = document.getElementById("rechercheSuggestionInput").value;
         var zoneSuggestions = jquery__WEBPACK_IMPORTED_MODULE_0__('#suggestions');
         if (!recherche) {
             return;
         }
         console.log("Cherche des suggestions pour la recherche : ", recherche);
+        // Recherche des suggestions à partir de la recherche 
         jquery__WEBPACK_IMPORTED_MODULE_0__["getJSON"]('https://api.lyrics.ovh/' + '/suggest/' + recherche, function (data) {
             var finalResults = [];
             var seenResults = [];
+            // On vide l'affichage des suggestions. 
             document.getElementById("suggestions").innerHTML = "";
             data.data.forEach(function (resultat) {
-                // On récupère 5 suggestions. 
+                // On récupère 5 suggestions max. 
                 if (seenResults.length >= 5) {
                     return;
                 }
+                // La suggestion est composée du nom de l'artiste et d'un titre. 
                 var suggestion = resultat.artist.name + ' - ' + resultat.title;
+                // Pour éviter les doublons de suggestions  
                 if (seenResults.indexOf(suggestion) >= 0) {
                     return;
                 }
+                // On ajoute la suggestion à la liste
                 seenResults.push(suggestion);
                 finalResults.push({
                     display: suggestion,
@@ -519,27 +535,34 @@ class LyricsComponent {
                     title: resultat.title
                 });
             });
+            // On parcourt les suggestions retenues et on les ajoute à l'affichage. 
             finalResults.forEach(function (resultat, i) {
                 console.log(resultat.title);
                 console.log(resultat.artist);
+                // Ajout de la suggestion à l'affichage 
                 var s = jquery__WEBPACK_IMPORTED_MODULE_0__('<p class="suggestion' + i + '"> <a class="badge badge-info" href="#" >' + resultat.display + '</a></p>');
                 zoneSuggestions.append(s);
+                // Si on clique sur la première suggestion, cela remplit automatiquement les champs "artiste" et "titre" de la partie "Chercher les paroles"
                 jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion0", function (event) {
                     document.getElementById("titre").value = finalResults[0].title;
                     document.getElementById("artiste").value = finalResults[0].artist;
                 });
+                // Si on clique sur la deuxième suggestion, cela remplit automatiquement les champs "artiste" et "titre" de la partie "Chercher les paroles"
                 jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion1", function (event) {
                     document.getElementById("titre").value = finalResults[1].title;
                     document.getElementById("artiste").value = finalResults[1].artist;
                 });
+                // Si on clique sur la troisième suggestion, cela remplit automatiquement les champs "artiste" et "titre" de la partie "Chercher les paroles"
                 jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion2", function (event) {
                     document.getElementById("titre").value = finalResults[2].title;
                     document.getElementById("artiste").value = finalResults[2].artist;
                 });
+                // Si on clique sur la quatrième suggestion, cela remplit automatiquement les champs "artiste" et "titre" de la partie "Chercher les paroles"
                 jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion3", function (event) {
                     document.getElementById("titre").value = finalResults[3].title;
                     document.getElementById("artiste").value = finalResults[3].artist;
                 });
+                // Si on clique sur la cinquième suggestion, cela remplit automatiquement les champs "artiste" et "titre" de la partie "Chercher les paroles"
                 jquery__WEBPACK_IMPORTED_MODULE_0__("#suggestions").on("click", ".suggestion4", function (event) {
                     document.getElementById("titre").value = finalResults[4].title;
                     document.getElementById("artiste").value = finalResults[4].artist;
@@ -573,7 +596,7 @@ LyricsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCo
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](17, "br");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](18, "button", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_18_listener() { return ctx.findLyricsAndMusicVideo(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function LyricsComponent_Template_button_click_18_listener() { return ctx.findLyrics(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](19, " Chercher les paroles");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -755,7 +778,7 @@ function AccueilComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " TEST ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, " Bienvenue sur ZikiFy ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AccueilComponent_div_0_Template_button_click_3_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.loginSpotify(); });
@@ -1568,6 +1591,7 @@ class ConcertComponent {
     ngOnInit() {
         this.chercherConcert();
     }
+    // Cherche les concerts prévus et les ajoute au tableau d'affichage 
     chercherConcert() {
         jquery__WEBPACK_IMPORTED_MODULE_0__["ajax"]({
             type: "GET",
@@ -1575,8 +1599,11 @@ class ConcertComponent {
             async: true,
             dataType: "json",
             success: function (data) {
+                // Récupération des données des évènements. Pour chaque donnée : 
                 data._embedded.events.forEach(function (resultat, i) {
                     var tableauConcert = jquery__WEBPACK_IMPORTED_MODULE_0__('#tableauConcert');
+                    // On récupère son nom, sa date et l'url permettant la réservation des tickets. 
+                    // Remarque : On fait en sorte que le lien permettant de réserver les tickets s'ouvre dans une autre fenêtre. 
                     var c = jquery__WEBPACK_IMPORTED_MODULE_0__(`
                     <tr>
                       <td class="text-center">` + (i + 1) + `</td>
@@ -1588,12 +1615,11 @@ class ConcertComponent {
                           </a>
                       </td>
                     </tr>`);
+                    // On ajoute le concert au tableau. 
                     tableauConcert.append(c);
                 });
             },
-            error: function (xhr, status, err) {
-                // This time, we do not end up here!
-            }
+            error: function (xhr, status, err) { }
         });
     }
 }
@@ -1855,26 +1881,64 @@ __webpack_require__.r(__webpack_exports__);
 
 class InfosComponent {
     constructor() { }
+    //Lancement de la recherche
     ngOnInit() {
+        this.findInfos();
+    }
+    //Fonction permettant de trouver les informations sur un artistes
+    findInfos() {
+        var ul = document.getElementById('bands'); //emplacement du résultat de la requête
+        var key = 'dd0206bfd0fa1db57160d517a0c5770b8f05f978'; //Consumer Key de l'API
+        var secret = '380aaea43ceed59e0b3517f8f70e34cda6dcd064'; //Consumer Secret de l'API
+        //Récupération des valeurs recherché par l'utilisateur (nom de l'artiste et son type)
+        var artiste = document.getElementById("artiste").value;
+        var typeArtiste = document.getElementById("typeArtiste").value;
+        init_crypto(); //Cryptage des Consumer Key et Secret
+        var api = new MusicStoryApi(key, secret, null, null, null); //Lancement de l'API
+        //Lancement d'une recherche dans l'API
+        api.search('Artist', { name: artiste, type: typeArtiste }, function (list) {
+            while (list.hasNext()) {
+                list.next().getConnector('pictures', null, null, null, function (pics, _this) {
+                    _this.getConnector('albums', { link: 'Main' }, null, 50, function (albums) {
+                        var li = document.createElement('li');
+                        li.innerHTML = '<h2>' + _this.name + '</h2>' + ((pics.size() > 0) ? '<img height="50" src="' + pics.current().url + '"/>' : '') + '<ul>';
+                        while (albums.hasNext()) {
+                            var album = albums.next();
+                            li.innerHTML += '<li><a target="_blank" href="' + album.url + '">' + album.title + '</a></li>';
+                        }
+                        li.innerHTML += '<ul>';
+                        ul.appendChild(li);
+                    });
+                });
+            }
+        }, null, 50);
     }
 }
 InfosComponent.ɵfac = function InfosComponent_Factory(t) { return new (t || InfosComponent)(); };
-InfosComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InfosComponent, selectors: [["app-infos"]], decls: 9, vars: 0, consts: [[1, "card", "card-chart"], [1, "carte-infos"], [1, "card-header"], [1, "titre-carte"], [1, "card-body"], [1, "contenu-carte"]], template: function InfosComponent_Template(rf, ctx) { if (rf & 1) {
+InfosComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: InfosComponent, selectors: [["app-infos"]], decls: 17, vars: 0, consts: [[1, "card-body"], ["id", "titreCartes", 1, "card-title"], ["id", "texteSaisie"], ["id", "artiste", "required", ""], ["id", "typeArtiste", "required", ""], ["type", "button", 1, "btn", "btn-success", "animation-on-hover", 3, "click"], ["id", "bands"]], template: function InfosComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Infos");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h4", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "Envie de connaitre des informations sur un artiste ?");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, " Obtenez des informations sur vos artistes favoris ! ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "h4", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, " Nom de l'artiste : ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "input", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "h4", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " Type de l'artiste (groupe : 'Band' ou personne : 'Person') : ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "input", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "button", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function InfosComponent_Template_button_click_13_listener() { return ctx.findInfos(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " Obtenir des informations");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "br");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "ul", 6);
     } }, styles: [".carte-infos[_ngcontent-%COMP%] {\n  background-color: #f8f88e;\n  background: #f0f04e;\n  background: linear-gradient(0deg, #f0f04e 0%, #f8f88e 100%);\n}\n\n.contenu-carte[_ngcontent-%COMP%] {\n  color: black;\n  font-size: 15px;\n  text-align: center;\n  font-weight: bold;\n}\n\n.titre-carte[_ngcontent-%COMP%] {\n  font-size: 30px;\n  color: black;\n  text-decoration: underline;\n  text-align: center;\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFxpbmZvcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLHlCQUFBO0VBQ0EsbUJBQUE7RUFJQSwyREFBQTtBQUNKOztBQUVBO0VBQ0ksWUFBQTtFQUNBLGVBQUE7RUFDQSxrQkFBQTtFQUNBLGlCQUFBO0FBQ0o7O0FBRUE7RUFDSSxlQUFBO0VBQ0EsWUFBQTtFQUNBLDBCQUFBO0VBQ0Esa0JBQUE7RUFDQSxpQkFBQTtBQUNKIiwiZmlsZSI6ImluZm9zLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNhcnRlLWluZm9zeyAgICBcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICNmOGY4OGU7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZjBmMDRlO1xyXG4gICAgYmFja2dyb3VuZDogLXdlYmtpdC1saW5lYXItZ3JhZGllbnQoMGRlZywgI2YwZjA0ZSAwJSwgI2Y4Zjg4ZSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IC1vLWxpbmVhci1ncmFkaWVudCgwZGVnLCAjZjBmMDRlIDAlLCAjZjhmODhlIDEwMCUpO1xyXG4gICAgYmFja2dyb3VuZDogLW1vei1saW5lYXItZ3JhZGllbnQoMGRlZywgI2YwZjA0ZSAwJSwgI2Y4Zjg4ZSAxMDAlKTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCgwZGVnLCAjZjBmMDRlIDAlLCAjZjhmODhlIDEwMCUpO1xyXG59XHJcblxyXG4uY29udGVudS1jYXJ0ZXtcclxuICAgIGNvbG9yOiBibGFjaztcclxuICAgIGZvbnQtc2l6ZTogMTVweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjsgXHJcbiAgICBmb250LXdlaWdodDogYm9sZDsgXHJcbn1cclxuXHJcbi50aXRyZS1jYXJ0ZSB7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbiAgICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsgXHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7IFxyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbn0iXX0= */"] });
 
 
